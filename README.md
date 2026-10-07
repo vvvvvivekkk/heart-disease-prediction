@@ -8,6 +8,9 @@ The model is a compact fully-connected neural network (MLP) trained on the
 classic **UCI Cleveland Heart Disease** dataset, with a clean, reproducible
 pipeline: data → EDA → preprocessing → training → evaluation → inference.
 
+> 📊 **Presenting this project?** A simple 8-slide explainer is in
+> [`docs/heart_disease_prediction_slides.pdf`](docs/heart_disease_prediction_slides.pdf).
+
 ---
 
 ## Results
@@ -95,6 +98,8 @@ heart-disease-prediction/
 ├── tests/                    # pytest suite (data, model, end-to-end)
 ├── notebooks/
 │   └── heart_disease_prediction.ipynb   # end-to-end walkthrough for the report
+├── docs/
+│   └── heart_disease_prediction_slides.pdf   # 8-slide explainer
 ├── results/                  # trained model, metrics, plots, cv & baseline results
 ├── conftest.py
 ├── requirements.txt
@@ -131,16 +136,79 @@ The train/validation/test split is **stratified** and **deterministic** (70 / 15
 
 ---
 
-## Getting started
+## Getting started (step by step)
+
+New to Python? Follow these exactly — each step is one copy-paste.
+
+### Step 0 — Install the tools you need (one time)
+
+You need **Python 3.10 or newer** and **Git**.
+
+- Python: download from <https://www.python.org/downloads/> and install.
+  On Windows, tick **"Add Python to PATH"** during install.
+- Git: download from <https://git-scm.com/downloads> and install.
+
+Check they work (open a terminal / Command Prompt and run):
 
 ```bash
-# 1. Clone
+python --version      # should print Python 3.10 or higher
+git --version         # should print a git version
+```
+
+> On macOS/Linux, if `python` isn't found, use `python3` (and `pip3`) instead.
+
+### Step 1 — Download the project
+
+```bash
 git clone https://github.com/vvvvvivekkk/heart-disease-prediction.git
 cd heart-disease-prediction
+```
 
-# 2. Install dependencies (a virtual environment is recommended)
+(No Git? On the GitHub page click **Code → Download ZIP**, unzip it, then open a
+terminal inside the unzipped folder.)
+
+### Step 2 — Create a virtual environment (keeps things clean)
+
+```bash
+python -m venv .venv
+```
+
+### Step 3 — Activate it
+
+- **Windows (PowerShell):**
+  ```powershell
+  .venv\Scripts\Activate.ps1
+  ```
+- **Windows (Command Prompt):**
+  ```cmd
+  .venv\Scripts\activate.bat
+  ```
+- **macOS / Linux:**
+  ```bash
+  source .venv/bin/activate
+  ```
+
+You should now see `(.venv)` at the start of your terminal line.
+
+### Step 4 — Install the libraries
+
+```bash
 pip install -r requirements.txt
 ```
+
+(First time installing PyTorch can take a few minutes — that's normal.)
+
+### Step 5 — Check it works
+
+```bash
+python -m src.data
+```
+
+If it prints the train/val/test sizes, you're all set. ✅
+
+---
+
+## Running the project
 
 ### Train
 
@@ -190,6 +258,18 @@ pytest -q
 The suite (14 tests) covers the data pipeline (schema, determinism, scaling, no
 leakage of NaNs), the model (output shapes, probabilities in `[0, 1]`,
 configurable depth), and an end-to-end train → save → predict smoke test.
+
+---
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| `python: command not found` | Use `python3` and `pip3` instead. |
+| `pip` is not recognized | Reinstall Python with **"Add to PATH"** ticked, or use `python -m pip`. |
+| PowerShell blocks activation (`running scripts is disabled`) | Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, then activate again. |
+| `ModuleNotFoundError: No module named 'src'` | Run commands from the project root folder (where this README is). |
+| `No module named 'torch'` | Make sure the venv is active, then `pip install -r requirements.txt`. |
 
 ---
 
