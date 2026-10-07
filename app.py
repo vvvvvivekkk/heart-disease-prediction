@@ -68,7 +68,7 @@ with gr.Blocks(title="Heart Disease Prediction") as demo:
     )
     with gr.Row():
         with gr.Column():
-            age = gr.Slider(29, 77, value=57, step=1, label="Age")
+            age = gr.Slider(24, 77, value=57, step=1, label="Age")
             sex = gr.Radio(choices=SEX, value=1, label="Sex")
             cp = gr.Dropdown(choices=CP, value=0, label="Chest pain type")
             trestbps = gr.Slider(90, 200, value=130, step=1, label="Resting blood pressure (mm Hg)")
