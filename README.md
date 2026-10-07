@@ -9,7 +9,9 @@ classic **UCI Cleveland Heart Disease** dataset, with a clean, reproducible
 pipeline: data → EDA → preprocessing → training → evaluation → inference.
 
 > 📊 **Presenting this project?** A simple 8-slide explainer is in
-> [`docs/heart_disease_prediction_slides.pdf`](docs/heart_disease_prediction_slides.pdf).
+> [`docs/heart_disease_prediction_slides.pdf`](docs/heart_disease_prediction_slides.pdf),
+> with per-slide speaker notes (what to say + key terms + likely questions) in
+> [`docs/presentation_guide.docx`](docs/presentation_guide.docx).
 
 ---
 
