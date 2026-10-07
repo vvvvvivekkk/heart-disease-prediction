@@ -8,6 +8,27 @@ The model is a compact fully-connected neural network (MLP) trained on the
 classic **UCI Cleveland Heart Disease** dataset, with a clean, reproducible
 pipeline: data → EDA → preprocessing → training → evaluation → inference.
 
+### What's inside
+
+- A reproducible **PyTorch** neural network (MLP) for heart-disease prediction
+- A clean preprocessing pipeline (scaling + one-hot) with stratified, deterministic splits
+- Training with **early stopping** and full evaluation (accuracy, precision, recall, F1, ROC-AUC) with plots
+- **5-fold cross-validation** and **classical-model baselines** (logistic regression, random forest, gradient boosting) for comparison
+- An **EDA notebook**, a **web interface** for a live demo, and a **pytest** test suite
+- Ready-to-present **slides (PPTX + PDF)** with per-slide speaker notes
+
+### Quick start
+
+```bash
+git clone https://github.com/vvvvvivekkk/heart-disease-prediction.git
+cd heart-disease-prediction
+pip install -r requirements.txt
+python -m src.train     # train + evaluate (writes results/)
+python app.py           # launch the web demo at http://127.0.0.1:7860
+```
+
+New to Python? Follow the detailed [step-by-step setup](#getting-started-step-by-step) below.
+
 > 📊 **Presenting this project?** A simple 8-slide explainer is available as an
 > editable PowerPoint
 > [`docs/heart_disease_prediction_slides.pptx`](docs/heart_disease_prediction_slides.pptx)
@@ -104,8 +125,11 @@ heart-disease-prediction/
 ├── tests/                    # pytest suite (data, model, end-to-end)
 ├── notebooks/
 │   └── heart_disease_prediction.ipynb   # end-to-end walkthrough for the report
-├── docs/
-│   └── heart_disease_prediction_slides.pdf   # 8-slide explainer
+├── docs/                     # presentation materials
+│   ├── heart_disease_prediction_slides.pptx   # editable 8-slide deck
+│   ├── heart_disease_prediction_slides.pdf    # deck as PDF
+│   ├── presentation_guide.docx                # per-slide speaker notes (editable)
+│   └── presentation_guide.pdf                 # speaker notes as PDF
 ├── results/                  # trained model, metrics, plots, cv & baseline results
 ├── conftest.py
 ├── requirements.txt
