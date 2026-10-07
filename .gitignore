@@ -12,6 +12,10 @@ env/
 .idea/
 .vscode/
 
+# Gradio app runtime
+.gradio/
+flagged/
+
 # Note: the trained model, plots and metrics in results/ ARE committed so the
 # project is reproducible and the README renders without re-running training.
 # Re-generate them any time with:  python -m src.train

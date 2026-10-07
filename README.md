@@ -100,6 +100,7 @@ heart-disease-prediction/
 │   ├── cross_validate.py     # 5-fold stratified cross-validation
 │   ├── baselines.py          # logistic regression / random forest / gradient boosting
 │   └── predict.py            # single-patient inference demo
+├── app.py                    # web interface for a live demo (Gradio)
 ├── tests/                    # pytest suite (data, model, end-to-end)
 ├── notebooks/
 │   └── heart_disease_prediction.ipynb   # end-to-end walkthrough for the report
@@ -236,6 +237,20 @@ python -m src.evaluate              # reproduces metrics + plots from the saved 
 ```bash
 python -m src.predict              # edit the sample dict inside the file
 ```
+
+### Web interface (live demo) 🎬
+
+A simple browser app to **demo the model live** — type in a patient's details and
+get an instant prediction. Best option for showing it in class.
+
+```bash
+python app.py
+```
+
+Then open the URL it prints — **http://127.0.0.1:7860** — in your browser. Enter
+values (or click one of the built-in **example patients**) and press **Predict**.
+To show it on another machine during the demo, change the last line of `app.py`
+to `demo.launch(share=True)` for a temporary public link.
 
 ### Cross-validation & baselines
 
