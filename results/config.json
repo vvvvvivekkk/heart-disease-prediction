@@ -1,0 +1,42 @@
+{
+  "input_dim": 27,
+  "hidden_dims": [
+    64,
+    32
+  ],
+  "dropout": 0.3,
+  "seed": 42,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "batch_size": 32,
+  "epochs_run": 44,
+  "feature_names": [
+    "cont__age",
+    "cont__trestbps",
+    "cont__chol",
+    "cont__thalach",
+    "cont__oldpeak",
+    "cat__cp_0",
+    "cat__cp_1",
+    "cat__cp_2",
+    "cat__cp_3",
+    "cat__restecg_0",
+    "cat__restecg_1",
+    "cat__restecg_2",
+    "cat__slope_0",
+    "cat__slope_1",
+    "cat__slope_2",
+    "cat__ca_0",
+    "cat__ca_1",
+    "cat__ca_2",
+    "cat__ca_3",
+    "cat__ca_4",
+    "cat__thal_0",
+    "cat__thal_1",
+    "cat__thal_2",
+    "cat__thal_3",
+    "bin__sex",
+    "bin__fbs",
+    "bin__exang"
+  ]
+}
