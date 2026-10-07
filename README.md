@@ -8,7 +8,10 @@ The model is a compact fully-connected neural network (MLP) trained on the
 classic **UCI Cleveland Heart Disease** dataset, with a clean, reproducible
 pipeline: data → EDA → preprocessing → training → evaluation → inference.
 
-> 📊 **Presenting this project?** A simple 8-slide explainer is in
+> 📊 **Presenting this project?** A simple 8-slide explainer is available as an
+> editable PowerPoint
+> [`docs/heart_disease_prediction_slides.pptx`](docs/heart_disease_prediction_slides.pptx)
+> and as a PDF
 > [`docs/heart_disease_prediction_slides.pdf`](docs/heart_disease_prediction_slides.pdf),
 > with per-slide speaker notes (what to say + key terms + likely questions) in
 > [`docs/presentation_guide.docx`](docs/presentation_guide.docx).
@@ -308,3 +311,4 @@ by R. Detrano et al. Used here for an academic course project only
 | 23EG106C01 | Aedula Sricharan |
 | 23EG106C02 | Akkinepally Nagasai |
 | 23EG106C03 | Akshith Sai Nalla |
+| 23EG106C04 | Vivek Reddy A |
