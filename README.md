@@ -291,7 +291,7 @@ re-running.
 
 ## License
 
-Released under the [MIT License](LICENSE) © 2026 Aleti Vivek Reddy.
+Released under the [MIT License](LICENSE) © 2026 the project team.
 
 ## Acknowledgements
 
@@ -299,6 +299,10 @@ Dataset: UCI Machine Learning Repository — *Heart Disease* (Cleveland), donate
 by R. Detrano et al. Used here for an academic course project only
 (non-commercial, educational).
 
-## Author
+## Team
 
-**Aleti Vivek Reddy** · GitHub [@vvvvvivekkk](https://github.com/vvvvvivekkk)
+| Roll No. | Name |
+|---|---|
+| 23EG106C01 | Aedula Sricharan |
+| 23EG106C02 | Akkinepally Nagasai |
+| 23EG106C03 | Akshith Sai Nalla |
