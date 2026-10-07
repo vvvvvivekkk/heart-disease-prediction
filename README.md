@@ -12,8 +12,24 @@ pipeline: data → EDA → preprocessing → training → evaluation → inferen
 
 ## Results
 
-Trained with the default settings (seed = 42) and evaluated on a held-out test
-set of 46 patients:
+### Cross-validated performance (headline)
+
+Because the dataset is small, the primary numbers come from **5-fold stratified
+cross-validation** — the preprocessor is re-fit inside every fold to prevent
+leakage (seed = 42):
+
+| Metric | Mean ± Std |
+|---|:--:|
+| Accuracy | 0.818 ± 0.053 |
+| F1-score | 0.833 ± 0.045 |
+| **ROC-AUC** | **0.882 ± 0.062** |
+
+Reproduce with `python -m src.cross_validate`.
+
+### Single held-out test split
+
+The committed model (`results/model.pt`) is trained on the 70/15/15 split and
+evaluated on the 46-patient test set:
 
 | Metric | Score |
 |-----------|:-----:|
@@ -21,17 +37,32 @@ set of 46 patients:
 | Precision | 0.769 |
 | Recall (sensitivity) | 0.800 |
 | F1-score | 0.784 |
-| **ROC-AUC** | **0.876** |
+| ROC-AUC | 0.876 |
 
 > For a medical screening task, **recall** (catching patients who actually have
-> the disease) matters most — the model recovers 80% of true cases, and the
-> ROC-AUC of 0.876 shows strong overall separability. The test set is small, so
-> individual metrics will shift somewhat with a different random seed; the
-> numbers above are fully reproducible with the committed configuration.
+> the disease) matters most — the model recovers 80% of true cases. The test set
+> is only 46 patients, which is exactly why the cross-validated numbers above
+> give the more reliable picture.
 
 | Confusion matrix | ROC curve | Training curves |
 |---|---|---|
 | ![Confusion matrix](results/confusion_matrix.png) | ![ROC curve](results/roc_curve.png) | ![Training curves](results/training_curves.png) |
+
+### How the neural network compares to classical models
+
+Same held-out test split, for reference (`python -m src.baselines`):
+
+| Model | Accuracy | F1 | ROC-AUC |
+|---|:--:|:--:|:--:|
+| **MLP (this project)** | 0.761 | 0.784 | **0.876** |
+| Logistic Regression | 0.826 | 0.846 | 0.867 |
+| Random Forest | 0.717 | 0.764 | 0.851 |
+| Gradient Boosting | 0.761 | 0.792 | 0.863 |
+
+On a dataset this small and well-structured, a plain logistic regression is
+competitive with the neural network — a useful reminder that deep learning is
+not automatically superior on small tabular problems. The MLP still earns the
+best ROC-AUC.
 
 ---
 
@@ -58,10 +89,14 @@ heart-disease-prediction/
 │   ├── model.py              # HeartMLP — the neural network
 │   ├── train.py              # training loop + early stopping, saves artifacts
 │   ├── evaluate.py           # metrics + plots
+│   ├── cross_validate.py     # 5-fold stratified cross-validation
+│   ├── baselines.py          # logistic regression / random forest / gradient boosting
 │   └── predict.py            # single-patient inference demo
+├── tests/                    # pytest suite (data, model, end-to-end)
 ├── notebooks/
 │   └── heart_disease_prediction.ipynb   # end-to-end walkthrough for the report
-├── results/                  # trained model, metrics, plots (regenerable)
+├── results/                  # trained model, metrics, plots, cv & baseline results
+├── conftest.py
 ├── requirements.txt
 ├── LICENSE
 └── README.md
@@ -129,6 +164,13 @@ python -m src.evaluate              # reproduces metrics + plots from the saved 
 python -m src.predict              # edit the sample dict inside the file
 ```
 
+### Cross-validation & baselines
+
+```bash
+python -m src.cross_validate            # 5-fold CV of the MLP
+python -m src.baselines                 # logistic regression / RF / gradient boosting
+```
+
 ### Notebook
 
 ```bash
@@ -137,6 +179,17 @@ jupyter notebook notebooks/heart_disease_prediction.ipynb
 
 The notebook runs the whole pipeline top-to-bottom with EDA plots — handy for
 the presentation/report.
+
+### Tests
+
+```bash
+pip install pytest
+pytest -q
+```
+
+The suite (14 tests) covers the data pipeline (schema, determinism, scaling, no
+leakage of NaNs), the model (output shapes, probabilities in `[0, 1]`,
+configurable depth), and an end-to-end train → save → predict smoke test.
 
 ---
 
@@ -149,10 +202,10 @@ re-running.
 
 ## Possible extensions
 
-- k-fold cross-validation for a tighter performance estimate
-- Hyper-parameter search (hidden sizes, dropout, learning rate)
-- Baselines for comparison (logistic regression, random forest, gradient boosting)
+- Hyper-parameter search (hidden sizes, dropout, learning rate, batch size)
 - Threshold tuning to trade precision against recall for screening
+- Feature-importance / SHAP analysis for interpretability
+- Nested cross-validation for an unbiased model-selection estimate
 
 ---
 
